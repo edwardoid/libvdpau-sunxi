@@ -1,6 +1,6 @@
 TARGET = libvdpau_sunxi.so.1
-SRC = device.c presentation_queue.c surface_output.c surface_video.c surface_bitmap.c
-SRC += video_mixer.c decoder.c handles.c ve.c h264.c mpeg12.c
+SRC:= $(wildcard *.c)
+CC = gcc
 CFLAGS ?= -Wall -O3
 LDFLAGS ?=
 
@@ -27,9 +27,9 @@ $(TARGET): $(OBJ)
 	$(CC) $(LIB_LDFLAGS) $(LDFLAGS) $(OBJ) -o $@
 
 clean:
-	-rm -f $(OBJ)
-	-rm -f $(DEP)
-	-rm -f $(TARGET)
+	rm -f $(OBJ)
+	rm -f $(DEP)
+	rm -f $(TARGET)
 
 install: $(TARGET)
 	install -D $(TARGET) $(DESTDIR)$(MODULEDIR)/$(TARGET)
