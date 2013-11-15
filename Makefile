@@ -1,4 +1,4 @@
-TARGET = libvdpau_sunxi.so.1
+TARGET = libvdpau_fbturbo.so.1
 SRC:= $(wildcard *.c)
 CC = gcc
 CFLAGS ?= -Wall -O3
@@ -9,7 +9,7 @@ MAKEFLAGS += -rR --no-print-directory
 
 DEP_CFLAGS = -MD -MP -MQ $@
 LIB_CFLAGS = -fpic
-LIB_LDFLAGS = -shared -Wl,-soname,libvdpau_sunxi.so.1
+LIB_LDFLAGS = -shared -Wl,-soname,$(TARGET)
 
 OBJ = $(addsuffix .o,$(basename $(SRC)))
 DEP = $(addsuffix .d,$(basename $(SRC)))
