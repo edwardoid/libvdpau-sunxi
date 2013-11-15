@@ -35,7 +35,7 @@ int handle_create(void *data)
 	if (!data)
 		return -1;
 
-	for (index = 0; index < ht.size; index++)
+	for (index = 0; index < ht.size; ++index)
 		if (ht.data[index] == NULL)
 			break;
 

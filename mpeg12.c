@@ -30,10 +30,10 @@ static int mpeg_find_startcode(const uint8_t *data, int len)
 		for ( ; pos < len; pos++)
 		{
 			if (data[pos] == 0x00)
-				zeros++;
+				++zeros;
 			else if (data[pos] == 0x01 && zeros >= 2)
 			{
-				pos++;
+				++pos;
 				break;
 			}
 			else
@@ -59,9 +59,9 @@ int mpeg12_decode(decoder_ctx_t *decoder, VdpPictureInfoMPEG1Or2 const *info, co
 	writel((readl(ve_regs + VE_CTRL) & ~0xf) | 0x0, ve_regs + VE_CTRL);
 
 	// set quantisation tables
-	for (i = 0; i < 64; i++)
+	for (i = 0; i < 64; ++i)
 		writel((uint32_t)(64 + i) << 8 | info->intra_quantizer_matrix[i], ve_regs + VE_MPEG_IQ_MIN_INPUT);
-	for (i = 0; i < 64; i++)
+	for (i = 0; i < 64; ++i)
 		writel((uint32_t)(i) << 8 | info->non_intra_quantizer_matrix[i], ve_regs + VE_MPEG_IQ_MIN_INPUT);
 
 	// set size

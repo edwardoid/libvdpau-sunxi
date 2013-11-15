@@ -130,7 +130,7 @@ VdpStatus vdp_decoder_render(VdpDecoder decoder, VdpVideoSurface target, VdpPict
 
 	unsigned int i, pos = 0;
 
-	for (i = 0; i < bitstream_buffer_count; i++)
+	for (i = 0; i < bitstream_buffer_count; ++i)
 	{
 		memcpy(dec->data + pos, bitstream_buffers[i].bitstream, bitstream_buffers[i].bitstream_bytes);
 		pos += bitstream_buffers[i].bitstream_bytes;

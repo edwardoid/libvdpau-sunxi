@@ -173,6 +173,7 @@ void *ve_malloc(int size)
 	size = (size + PAGE_SIZE - 1) & ~(PAGE_SIZE - 1);
 	struct memchunk_t *c, *best_chunk = NULL;
 	for (c = &first_memchunk; c != NULL; c = c->next)
+	{
 		if(c->virt_addr == NULL && c->size >= size)
 		{
 			if (best_chunk == NULL || c->size < best_chunk->size)
@@ -181,6 +182,7 @@ void *ve_malloc(int size)
 			if (c->size == size)
 				break;
 		}
+	}
 
 	if (!best_chunk)
 		return NULL;
@@ -213,15 +215,19 @@ void ve_free(void *ptr)
 
 	struct memchunk_t *c;
 	for (c = &first_memchunk; c != NULL; c = c->next)
+	{
 		if (c->virt_addr == ptr)
 		{
 			munmap(ptr, c->size);
 			c->virt_addr = NULL;
 			break;
 		}
+	}
 
 	for (c = &first_memchunk; c != NULL; c = c->next)
+	{
 		if (c->virt_addr == NULL)
+		{
 			while (c->next != NULL && c->next->virt_addr == NULL)
 			{
 				struct memchunk_t *n = c->next;
@@ -229,6 +235,8 @@ void ve_free(void *ptr)
 				c->next = n->next;
 				free(n);
 			}
+		}
+	}
 }
 
 uint32_t ve_virt2phys(void *ptr)

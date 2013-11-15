@@ -39,8 +39,6 @@ VdpStatus vdp_bitmap_surface_destroy(VdpBitmapSurface surface)
 
 VdpStatus vdp_bitmap_surface_get_parameters(VdpBitmapSurface surface, VdpRGBAFormat *rgba_format, uint32_t *width, uint32_t *height, VdpBool *frequently_accessed)
 {
-
-
 	return VDP_STATUS_ERROR;
 }
 
